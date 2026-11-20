@@ -30,7 +30,7 @@ public class CafeTable {
     @Column(name = "seats", nullable = false)
     private Integer seats;
 
-    @Column(name = "room", nullable = false, length = 40)
+    @Column(name = "pl/wsb/zajeciafitness/room", nullable = false, length = 40)
     private String room;
 
     /** Strona odwrotna: nie tworzy kolumny, tylko pozwala przejść od stolika do jego rezerwacji. */
