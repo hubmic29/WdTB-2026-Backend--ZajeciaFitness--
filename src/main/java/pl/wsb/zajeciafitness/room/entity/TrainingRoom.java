@@ -1,5 +1,9 @@
 package pl.wsb.zajeciafitness.room.entity;
 import jakarta.persistence.*;
+import pl.wsb.zajeciafitness.schedule.entity.FitnessClass;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Training_room")
@@ -21,6 +25,9 @@ public class TrainingRoom {
     @Column(name = "active", nullable = false)
     private Boolean active;
 
+    @OneToMany(mappedBy = "room")
+    private List<FitnessClass> classes = new ArrayList<>();
+
     protected TrainingRoom(){
     }
 
@@ -35,4 +42,5 @@ public class TrainingRoom {
     public Integer getCapacity(){return capacity;}
     public Integer getFloor(){return floor;}
     public Boolean getActive(){return active;}
+    public List<FitnessClass> getClasses(){return classes;}
 }

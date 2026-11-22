@@ -1,6 +1,7 @@
 package pl.wsb.zajeciafitness.member.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.zajeciafitness.account.domain.UserAccount;
 
 import java.time.LocalDate;
 
@@ -25,15 +26,20 @@ public class Member {
     @Embedded
     private EmergencyContact emergencyContact;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_account_id")
+    private UserAccount account;
+
     protected Member(){
 
     }
 
-    public Member(String phone, LocalDate joinedOn, EmergencyContact emergencyContact){
+    public Member(String phone, LocalDate joinedOn, EmergencyContact emergencyContact, UserAccount account){
         this.fullName = fullName;
         this.phone = phone;
         this.joinedOn = joinedOn;
         this.emergencyContact = emergencyContact;
+        this.account = account;
     }
 
     public Long getId() {
@@ -54,5 +60,9 @@ public class Member {
 
     public EmergencyContact getEmergencyContact() {
         return emergencyContact;
+    }
+
+    public UserAccount getAccount() {
+        return account;
     }
 }

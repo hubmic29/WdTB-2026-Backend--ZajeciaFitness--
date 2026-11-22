@@ -1,6 +1,7 @@
 package pl.wsb.zajeciafitness.schedule.entity;
 
 import jakarta.persistence.*;
+import pl.wsb.zajeciafitness.room.entity.TrainingRoom;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -26,14 +27,19 @@ public class FitnessClass {
     @Column(name = "starts_at", nullable = false)
     private LocalDateTime startsAt;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "room_id", nullable = false)
+    private TrainingRoom room;
+
     protected FitnessClass(){
     }
 
-    public FitnessClass(String title, ClassCategory category, BigDecimal price, LocalDateTime startsAt){
+    public FitnessClass(String title, ClassCategory category, BigDecimal price, LocalDateTime startsAt, TrainingRoom room){
         this.title = title;
         this.category = category;
         this.price = price;
         this.startsAt = startsAt;
+        this.room = room;
     }
 
     public Long getId() {
@@ -54,5 +60,9 @@ public class FitnessClass {
 
     public LocalDateTime getStartsAt() {
         return startsAt;
+    }
+
+    public TrainingRoom getRoom() {
+        return room;
     }
 }
